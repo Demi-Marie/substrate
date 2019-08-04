@@ -53,7 +53,7 @@ where
 	/// While proof recording is enabled, all accessed trie nodes are saved.
 	/// These recorded trie nodes can be used by a third party to prove the
 	/// output of this block builder without having access to the full storage.
-	pub fn at_block(
+pub fn at_block(
 		block_id: &BlockId<Block>,
 		api: &'a A,
 		proof_recording: bool,
