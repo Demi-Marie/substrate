@@ -19,10 +19,7 @@
 
 #![cfg_attr(not(feature = "std"), no_std)]
 #![forbid(unused_must_use, unsafe_code, unused_variables)]
-
-// TODO: @marcio uncomment this when BabeEquivocation is integrated.
-// #![forbid(dead_code)]
-
+#![deny(dead_code)]
 pub use timestamp;
 
 use rstd::{result, prelude::*};
@@ -47,6 +44,9 @@ use system::ensure_root;
 
 #[cfg(all(feature = "std", test))]
 mod tests;
+
+#[cfg(all(test, feature = "std"))]
+mod mock;
 
 /// The BABE inherent identifier.
 pub const INHERENT_IDENTIFIER: InherentIdentifier = *b"babeslot";
