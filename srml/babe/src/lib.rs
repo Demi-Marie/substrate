@@ -19,7 +19,6 @@
 
 #![cfg_attr(not(feature = "std"), no_std)]
 #![forbid(unused_must_use, unsafe_code, unused_variables)]
-#![deny(dead_code)]
 pub use timestamp;
 
 use rstd::{result, prelude::*};
