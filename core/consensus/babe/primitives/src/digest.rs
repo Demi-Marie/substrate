@@ -17,7 +17,7 @@
 //! Private implementation details of BABE digests.
 
 #[cfg(feature = "std")]
-use super::AuthoritySignature;
+use super::sr25519::AuthoritySignature;
 #[cfg(feature = "std")]
 use super::{BABE_ENGINE_ID, Epoch};
 #[cfg(not(feature = "std"))]

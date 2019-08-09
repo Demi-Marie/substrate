@@ -18,7 +18,8 @@
 //! from VRF outputs and manages epoch transitions.
 
 #![cfg_attr(not(feature = "std"), no_std)]
-#![forbid(unused_must_use, unsafe_code, unused_variables, unused_imports, unused_must_use)]
+#![forbid(unused_must_use, unsafe_code, unused_variables, unused_must_use)]
+#![deny(unused_imports)]
 pub use timestamp;
 
 use rstd::{result, prelude::*};
@@ -38,7 +39,7 @@ use inherents::{RuntimeString, InherentIdentifier, InherentData, ProvideInherent
 #[cfg(feature = "std")]
 use inherents::{InherentDataProviders, ProvideInherentData};
 use babe_primitives::{BABE_ENGINE_ID, ConsensusLog, BabeAuthorityWeight, Epoch, RawBabePreDigest};
-pub use babe_primitives::{AuthorityId, VRF_OUTPUT_LENGTH, PUBLIC_KEY_LENGTH};
+pub use babe_primitives::{sr25519::AuthorityId, VRF_OUTPUT_LENGTH, PUBLIC_KEY_LENGTH};
 use system::ensure_root;
 
 #[cfg(all(feature = "std", test))]

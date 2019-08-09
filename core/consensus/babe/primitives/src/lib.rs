@@ -30,22 +30,27 @@ use substrate_client::decl_runtime_apis;
 pub use digest::{BabePreDigest, CompatibleDigestItem};
 pub use digest::{BABE_VRF_PREFIX, RawBabePreDigest};
 
-mod app {
+mod app_sr25519 {
 	use app_crypto::{app_crypto, key_types::BABE, sr25519};
 	app_crypto!(sr25519, BABE);
 }
 
-/// A Babe authority keypair. Necessarily equivalent to the schnorrkel public key used in
-/// the main Babe module. If that ever changes, then this must, too.
-#[cfg(feature = "std")]
-pub type AuthorityPair = app::Pair;
+/// Sr25519 crypto for BABE
+pub mod sr25519 {
+	/// An BABE authority keypair.
+	#[cfg(feature = "std")]
+	pub type AuthorityPair = super::app_sr25519::Pair;
 
-/// A Babe authority signature.
-pub type AuthoritySignature = app::Signature;
+	/// An BABE authority signature.
+	pub type AuthoritySignature = super::app_sr25519::Signature;
 
-/// A Babe authority identifier. Necessarily equivalent to the schnorrkel public key used in
-/// the main Babe module. If that ever changes, then this must, too.
-pub type AuthorityId = app::Public;
+	/// A Babe authority identifier. Necessarily equivalent to the schnorrkel
+	/// public key used in the main Babe module. If that ever changes, then this
+	/// must, too.
+	pub type AuthorityId = super::app_sr25519::Public;
+}
+
+pub use sr25519::*;
 
 /// The `ConsensusEngineId` of BABE.
 pub const BABE_ENGINE_ID: ConsensusEngineId = *b"BABE";
