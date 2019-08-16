@@ -30,7 +30,7 @@ use substrate_service;
 use hex_literal::hex;
 use substrate_telemetry::TelemetryEndpoints;
 use grandpa_primitives::{AuthorityId as GrandpaId};
-use babe_primitives::{AuthorityId as BabeId};
+use babe_primitives::{sr25519::AuthorityId as BabeId};
 use im_online::AuthorityId as ImOnlineId;
 use sr_primitives::Perbill;
 
