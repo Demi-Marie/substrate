@@ -47,15 +47,19 @@ fn check_module() {
 #[test]
 fn check_epoch_change() {
 	with_externalities(&mut new_test_ext(vec![0, 1, 2, 3]), || {
-		Babe::randomness_change_epoch(1);
+		System::initialize(&1, &Default::default(), &Default::default(), &Default::default());
+		assert!(!Babe::should_end_session(0), "Genesis does not change sessions");
+		assert!(!Babe::should_end_session(200000),
+			"BABE does not include the block number in epoch calculations");
+		EpochStartSlot::put(1);
+		CurrentSlot::put(100000);
+		assert!(Babe::should_end_session(0));
 	})
 }
 
 #[test]
 fn authority_index() {
 	with_externalities(&mut new_test_ext(vec![0, 1, 2, 3]), || {
-		assert_eq!(Babe::find_author((&[(BABE_ENGINE_ID, &[][..])]).into_iter().cloned()), None,
-			"Trivially invalid authorities are ignored");
 		assert_eq!(Babe::find_author((&[(BABE_ENGINE_ID, &[][..])]).into_iter().cloned()), None,
 			"Trivially invalid authorities are ignored")
 	})
