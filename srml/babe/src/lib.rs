@@ -45,7 +45,7 @@ use system::ensure_root;
 #[cfg(all(feature = "std", test))]
 mod tests;
 
-#[cfg(all(test, feature = "std"))]
+#[cfg(all(feature = "std", test))]
 mod mock;
 
 /// The BABE inherent identifier.
